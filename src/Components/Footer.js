@@ -4,7 +4,7 @@ import logo from '../images/logo_transparent.png';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white py-4">
+        <footer className="bg-black text-white py-4">
             <div className="container mx-auto px-4 flex justify-between items-center">
                 <div className="flex items-center">
                     <img className="w-8 h-8 mr-2" src={logo} alt="Dine Discover Logo" />

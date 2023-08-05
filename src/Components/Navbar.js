@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo_transparent.png';
 
 const Navbar = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isTransparent, setIsTransparent] = useState(true);
 
     const handleMenuToggle = () => {
         setIsMenuOpen((prevState) => !prevState);
     };
 
+    const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        const breakpoint = 100; // Adjust this value as needed
+
+        if (scrollPosition > breakpoint) {
+            setIsTransparent(false);
+        } else {
+            setIsTransparent(true);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const navbarClass = `bg-${isTransparent ? 'transparent backdrop-filter backdrop-blur-md bg-opacity-70' : 'gray-800'} fixed w-full z-50`;
+
     return (
-        <nav className="bg-transparent backdrop-filter backdrop-blur-md bg-opacity-70 fixed w-full z-50">
+        <nav className={navbarClass}>
             <div className="container mx-auto flex justify-around items-center">
                 <div className="flex w-4/12 md:w-3/12 lg:w-2/12 items-center">
                     <Link to="/" className="flex items-center">
@@ -29,7 +50,7 @@ const Navbar = (props) => {
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0">
                         <li>
                             <Link
-                                to="/"
+                                to="/Home.js"
                                 className="block py-2 pl-3 pr-4 text-white hover:text-blue-200"
                                 aria-current="page"
                             >
@@ -58,6 +79,14 @@ const Navbar = (props) => {
                                 className="block py-2 pl-3 pr-4 text-white hover:text-blue-200"
                             >
                                 Contact
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/contact"
+                                className="block py-2 pl-3 pr-4 text-white hover:text-blue-200"
+                            >
+                                {props.profile}
                             </Link>
                         </li>
                     </ul>

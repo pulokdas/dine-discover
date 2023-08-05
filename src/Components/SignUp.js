@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import logo from '../images/logo_transparent.png';
 import loginBackground from '../images/loginbackground.jpg';
 
 const SignUp = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            const response = await axios.post('/api/register', {
+                name,
+                email,
+                password,
+            });
+
+            if (response.status === 201) {
+                alert('Sign up successful!'); // Replace with your desired UI feedback
+            } else {
+                console.error('Sign up failed:', response.data.error);
+                alert('Sign up failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+            alert('Sign up failed. Please try again.');
+        }
+
+        setIsSubmitting(false);
+    };
+
     return (
         <section
             className="h-screen flex items-center justify-center"
@@ -31,7 +62,8 @@ const SignUp = () => {
                                 type="text"
                                 name="name"
                                 id="name"
-                                className="bg-gray-300 bg-opacity-70 border border-gray-400 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:bg-opacity-70 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                onChange={(e) => setName(e.target.value)}
+                                className="bg-gray-900 bg-opacity-70 border border-gray-400 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:bg-opacity-70 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="John Doe"
                                 required=""
                             />
@@ -41,10 +73,11 @@ const SignUp = () => {
                                 Your email
                             </label>
                             <input
+                                onChange={(e) => setEmail(e.target.value)}
                                 type="email"
                                 name="email"
                                 id="email"
-                                className="bg-gray-300 bg-opacity-70 border border-gray-400 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:bg-opacity-70 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="bg-gray-900 bg-opacity-70 border border-gray-400 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:bg-opacity-70 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name@company.com"
                                 required=""
                             />
@@ -54,15 +87,18 @@ const SignUp = () => {
                                 Password
                             </label>
                             <input
+                                onChange={(e) => setPassword(e.target.value)}
                                 type="password"
                                 name="password"
                                 id="password"
                                 placeholder="••••••••"
-                                className="bg-gray-300 bg-opacity-70 border border-gray-400 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:bg-opacity-70 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="bg-gray-900 bg-opacity-70 border border-gray-400 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:bg-opacity-70 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required=""
                             />
                         </div>
                         <button
+                            onClick={handleSignUp}
+                            disabled={isSubmitting}
                             type="submit"
                             className="w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:bg-opacity-70 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >

@@ -7,7 +7,7 @@ import Footer from './Footer'
 export default function LandingPage() {
     return (
         <div>
-            <Navbar />
+            <Navbar home="Home" discover="Discover Now" />
             <Carousel />
             <Featured />
             <Footer />

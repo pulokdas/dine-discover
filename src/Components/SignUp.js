@@ -5,34 +5,21 @@ import logo from '../images/logo_transparent.png';
 import loginBackground from '../images/loginbackground.jpg';
 
 const SignUp = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('DONE!');
 
     const handleSignUp = async (event) => {
         event.preventDefault();
-        setIsSubmitting(true);
-
+        alert(email + " " + password + " " + name + " ");
         try {
-            const response = await axios.post('/api/register', {
-                name,
-                email,
-                password,
-            });
-
-            if (response.status === 201) {
-                alert('Sign up successful!'); // Replace with your desired UI feedback
-            } else {
-                console.error('Sign up failed:', response.data.error);
-                alert('Sign up failed. Please try again.');
-            }
+            const response = await axios.post('http://localhost:5000', { email, password, name });
+            alert(response.data.message);
         } catch (error) {
-            console.error('Error signing up:', error);
-            alert('Sign up failed. Please try again.');
+            alert('Error signing up: ' + error);
         }
-
-        setIsSubmitting(false);
     };
 
     return (
@@ -98,7 +85,7 @@ const SignUp = () => {
                         </div>
                         <button
                             onClick={handleSignUp}
-                            disabled={isSubmitting}
+                            // disabled={isSubmitting}
                             type="submit"
                             className="w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:bg-opacity-70 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >

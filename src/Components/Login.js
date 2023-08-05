@@ -1,11 +1,16 @@
 
-import { Link } from 'react-router-dom';
+import { Link, parsePath } from 'react-router-dom';
 import logo from '../images/logo_transparent.png';
 import React, { useState } from 'react';
 import axios from 'axios';
 import loginBackground from '../images/loginbackground.jpg';
+import Home from './Home';
+
+
 
 const Login = () => {
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,22 +19,25 @@ const Login = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        try {
-            const response = await axios.post('http://localhost:5000/api/login', {
-                email,
-                password,
-            });
+        //alert(email + " " + password);
 
-            console.log('User logged in:', response.data);
-            // You can redirect the user to another page or perform other actions here.
-        } catch (error) {
-            console.error('Error logging in:', error);
-        } finally {
-            setIsSubmitting(false);
+        if (email === "admin" && password === "admin") {
+            alert(email + " " + password);
+            <Home />
         }
+        else {
+            alert("Login " + email + " " + password);
+            <Login />
+        }
+
+
     };
 
     return (
+
+
+
+
         <section
             className="h-screen flex items-center justify-center"
             style={{

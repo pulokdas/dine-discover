@@ -9,7 +9,7 @@ const Card = (props) => {
     return (
         <div className="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow ">
             <Link to="">
-                <Carousel infiniteLoop rounded showArrows={false} autoPlay={true} interval={3000} showThumbs={false}>
+                <Carousel infiniteLoop showArrows={false} autoPlay={true} interval={3000} showThumbs={false}>
                     <div>
                         <img src={props.img1} alt="product" />
                     </div>

@@ -46,13 +46,13 @@ const Carousel = () => {
                 </p>
                 <div className=" space-x-4 z-10">
                     <Link
-                        to="/SignUp.js"
+                        to="/SignUp"
                         className="px-6 py-3 bg-teal-600 text-white rounded-lg text-lg font-bold hover:bg-teal-900"
                     >
                         Sign Up
                     </Link>
                     <Link
-                        to="/Login.js"
+                        to="/Login"
                         className="px-6 py-2 border-solid   border-4 border-teal-600  text-white rounded-lg font-bold text-lg hover:bg-teal-600"
                     >
                         Login

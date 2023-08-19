@@ -79,7 +79,7 @@ export default function Featured() {
                         </div>
                     </div>
                     <div className="text-center mt-16">
-                        <a href="/SignUp.js" className="px-6 py-3 bg-teal-600 text-white  rounded-lg font-bold hover:bg-teal-800">Join Dine Discover Now</a>
+                        <a href="/Owners" className="px-6 py-3 bg-teal-600 text-white  rounded-lg font-bold hover:bg-teal-800">Join Dine Discover As Owner</a>
                     </div>
                 </section>
             </div>

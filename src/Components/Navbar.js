@@ -6,13 +6,15 @@ const Navbar = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isTransparent, setIsTransparent] = useState(true);
 
+
+
     const handleMenuToggle = () => {
         setIsMenuOpen((prevState) => !prevState);
     };
 
     const handleScroll = () => {
         const scrollPosition = window.scrollY;
-        const breakpoint = 100; // Adjust this value as needed
+        const breakpoint = 100;
 
         if (scrollPosition > breakpoint) {
             setIsTransparent(false);
@@ -32,7 +34,7 @@ const Navbar = (props) => {
 
     return (
         <nav className={navbarClass}>
-            <div className="container mx-auto flex justify-around items-center">
+            <div className="container mx-auto flex  justify-around items-center">
                 <div className="flex w-4/12 md:w-3/12 lg:w-2/12 items-center">
                     <Link to="/" className="flex items-center">
                         <img
@@ -43,6 +45,7 @@ const Navbar = (props) => {
                     </Link>
                 </div>
                 <div
+                    // ternary oparator and handeling the menunar for small devices
                     className={`${isMenuOpen ? 'block' : 'hidden'
                         } w-full md:flex md:w-auto`}
                     id="navbar-default"
@@ -50,7 +53,7 @@ const Navbar = (props) => {
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0">
                         <li>
                             <Link
-                                to="/Home.js"
+                                to="/Home"
                                 className="block py-2 pl-3 pr-4 text-white hover:text-blue-200"
                                 aria-current="page"
                             >
@@ -67,7 +70,7 @@ const Navbar = (props) => {
                         </li>
                         <li>
                             <Link
-                                to="/about"
+                                to="/Aboutus"
                                 className="block py-2 pl-3 pr-4 text-white hover:text-blue-200"
                             >
                                 About Us
@@ -75,7 +78,7 @@ const Navbar = (props) => {
                         </li>
                         <li>
                             <Link
-                                to="/contact"
+                                to="/Contact"
                                 className="block py-2 pl-3 pr-4 text-white hover:text-blue-200"
                             >
                                 Contact
@@ -100,7 +103,7 @@ const Navbar = (props) => {
                 >
                     <span className="sr-only">Open main menu</span>
                     <svg
-                        className="w-5 h-5"
+                        className="w-8 h-8"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
